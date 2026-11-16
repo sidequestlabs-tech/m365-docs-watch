@@ -28,3 +28,18 @@ class RaisingClient:
 
     def create(self, **kwargs):
         raise RuntimeError("API down")
+
+
+class FakeSession:
+    """Captures ntfy POSTs."""
+
+    def __init__(self):
+        self.sent = []
+
+    @property
+    def json(self):
+        return self.sent[-1]
+
+    def post(self, url, json=None, timeout=None):
+        self.sent.append(json)
+        return SimpleNamespace(status_code=200, raise_for_status=lambda: None)
