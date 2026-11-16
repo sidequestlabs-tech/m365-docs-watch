@@ -43,3 +43,29 @@ class FakeSession:
     def post(self, url, json=None, timeout=None):
         self.sent.append(json)
         return SimpleNamespace(status_code=200, raise_for_status=lambda: None)
+
+
+FILLER = "This paragraph describes how auditing works in Microsoft Purview for investigators. " * 4
+
+
+def learn_html(body_md_paragraphs: list[str], title: str = "Test page") -> str:
+    paras = "".join(f"<p>{p}</p>" for p in body_md_paragraphs)
+    return (f'<html><head><meta name="updated_at" content="2026-11-01T00:00:00Z"></head><body><main>'
+            f'<div class="content"><h1>{title}</h1></div>'
+            f'<div class="content"><p>{FILLER}</p>{paras}</div></main></body></html>')
+
+
+class FakeFetcher:
+    """url -> FetchResult, or an Exception instance to raise."""
+
+    def __init__(self, responses: dict):
+        self.responses = responses
+
+    def __call__(self, url):
+        from notifier.fetch import FetchResult
+        r = self.responses[url]
+        if isinstance(r, Exception):
+            raise r
+        if isinstance(r, FetchResult):
+            return r
+        return FetchResult(200, url, r, None, "2026-11-01T00:00:00Z")

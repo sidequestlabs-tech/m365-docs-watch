@@ -485,8 +485,8 @@ pages:
   section: 7. Microsoft Sentinel / Log Analytics
   core: false
   why: Ongoing portal migration that changes where you click.
-- url: https://learn.microsoft.com/en-us/defender-xdr/microsoft-sentinel-onboard
-  slug: defender-xdr__microsoft-sentinel-onboard
+- url: https://learn.microsoft.com/en-us/azure/sentinel/microsoft-sentinel-onboard
+  slug: azure__sentinel__microsoft-sentinel-onboard
   title: Connect Sentinel to Defender XDR
   section: 7. Microsoft Sentinel / Log Analytics
   core: false

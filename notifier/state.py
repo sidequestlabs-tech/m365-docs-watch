@@ -10,6 +10,7 @@ class PageState:
     ms_date: str | None = None
     updated_at: str | None = None
     failures: int = 0
+    missing: bool = False
 
 
 @dataclass

@@ -125,7 +125,7 @@ Your "PowerShell export to CSV/JSON" path and programmatic collection. Watch for
 | ◽ | [OfficeActivity table](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/officeactivity) | Where UAL data lands in Sentinel, often kept longer than Purview's retention. |
 | ◽ | [Log Analytics data retention](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure) | Interactive vs long-term retention tiers. |
 | ◽ | [Sentinel moving to the Defender portal](https://learn.microsoft.com/en-us/azure/sentinel/move-to-defender) | Ongoing portal migration that changes where you click. |
-| ◽ | [Connect Sentinel to Defender XDR](https://learn.microsoft.com/en-us/defender-xdr/microsoft-sentinel-onboard) | The unified portal setup. |
+| ◽ | [Connect Sentinel to Defender XDR](https://learn.microsoft.com/en-us/azure/sentinel/microsoft-sentinel-onboard) | The unified portal setup. |
 
 ## 8. Exchange mail evidence (3)
 
