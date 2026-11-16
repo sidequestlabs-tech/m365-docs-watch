@@ -6,7 +6,7 @@ import re
 import sys
 import time
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit
 
@@ -22,6 +22,10 @@ from notifier.state import PageState, State, queue_append
 from notifier.watchlist import Page, load_watchlist, slug_for
 
 FAILURE_ALERT_AT = 3
+MASS_ALERT_LIMIT = 5
+SHRINK_RATIO = 0.5
+SHRINK_ACCEPT_AFTER = 3   # a shrink seen on 3 runs in a row is real
+FLAP_DAYS = 7
 PUSH, INFO = 4, 3
 MD_LINK = re.compile(r"\]\(([^)\s]+)")
 
@@ -32,6 +36,7 @@ class RunReport:
     queued: list[str] = field(default_factory=list)
     baselined: list[str] = field(default_factory=list)
     failed: list[str] = field(default_factory=list)
+    unsent: int = 0
     notifications: list[tuple] = field(default_factory=list)
 
 
@@ -60,6 +65,11 @@ def _suggestions(page: Page, new_texts: list[str], watched: set[str]) -> list[st
     return found
 
 
+def _sig(old: str, new: str) -> str:
+    """Same signature for A->B and B->A, so a flip-flop counts as one change."""
+    return hashlib.sha256("\x00".join(sorted([old.strip(), new.strip()])).encode()).hexdigest()[:16]
+
+
 def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bool = False,
               roadmap_xml: str | None = None) -> RunReport:
     root = Path(root)
@@ -70,66 +80,100 @@ def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bo
     first_run = loaded is None
     state = loaded or State()
     report = RunReport()
-    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-
-    def notify(title, body, click, priority):
-        report.notifications.append((title, body, click, priority))
+    now_dt = datetime.now(timezone.utc)
+    now = now_dt.isoformat(timespec="seconds")
+    page_alerts = []          # (title, body, click, priority, digest_item) — collapsed if too many
+    ai_ok = ai_fail = 0
 
     def queue(item):
         if not dry_run:
             queue_append(queue_path, item)
 
+    def alert(page, title, body, click, priority, summary=None, old="", new="", updated_at=None):
+        item = {"kind": "change", "slug": page.slug, "title": page.title, "section": page.section, "url": page.url,
+                "summary": summary or title, "old_text": old, "new_text": new, "updated_at": updated_at,
+                "detected_at": now}
+        page_alerts.append((title, body, click, priority, item))
+        report.pushed.append(page.slug)
+
     for page in pages:
         ps = state.pages.get(page.slug)
+        if ps is None:                       # placeholder so failure/missing alerts work before a baseline
+            ps = state.pages[page.slug] = PageState(hash="")
         snap = snap_dir / f"{page.slug}.md"
         try:
             res = fetcher(page.url)
             gone = res.status == 404 or (res.status == 200 and _path(res.final_url) != _path(page.url))
             if gone:
                 report.failed.append(page.slug)
-                if ps and not ps.missing:
+                if not ps.missing:
                     ps.missing = True
-                    notify(f"Page moved or removed: {page.title}",
-                           f"Was: {page.url}\nNow: {res.final_url if res.status != 404 else 'HTTP 404'}\n{page.section}",
-                           res.final_url if res.status != 404 else page.url, PUSH)
-                    report.pushed.append(page.slug)
+                    now_at = res.final_url if res.status != 404 else "HTTP 404"
+                    alert(page, f"Page moved or removed: {page.title}", f"Was: {page.url}\nNow: {now_at}\n{page.section}",
+                          res.final_url if res.status != 404 else page.url, PUSH)
                 continue
             if res.status != 200:
                 raise FetchError(f"HTTP {res.status}")
             text = extract_article(res.html)
+            if ps.hash and snap.exists() and ps.failures < SHRINK_ACCEPT_AFTER - 1:
+                if len(text) < SHRINK_RATIO * len(snap.read_text(encoding="utf-8")):
+                    raise FetchError("article shrank by more than half (possible error page)")
         except FetchError as e:
             report.failed.append(page.slug)
-            if ps:
-                ps.failures += 1
-                if ps.failures == FAILURE_ALERT_AT:
-                    notify(f"Page unreachable 3 runs in a row: {page.title}", f"{page.url}\n{e}", page.url, INFO)
+            ps.failures += 1
+            if ps.failures == FAILURE_ALERT_AT:
+                alert(page, f"Page unreachable 3 runs in a row: {page.title}", f"{page.url}\n{e}", page.url, INFO)
             continue
 
         digest = hashlib.sha256(text.encode()).hexdigest()
-        if ps is None or not snap.exists():
+        recent = [r for r in ps.recent_pushes
+                  if datetime.fromisoformat(r.split("|")[1]) > now_dt - timedelta(days=FLAP_DAYS)]
+        if not ps.hash or not snap.exists():
             report.baselined.append(page.slug)
         elif ps.hash != digest:
             old = snap.read_text(encoding="utf-8")
             hunks = [h for h in diff_hunks(old, text) if not is_trivial(h)]
             if hunks:
                 c = classify(page, hunks, client)
-                if c.level == "push":
+                ai_fail, ai_ok = ai_fail + c.fallback, ai_ok + (not c.fallback)
+                sig = _sig("\n".join(h.old_text for h in hunks), "\n".join(h.new_text for h in hunks))
+                repeat = any(r.startswith(sig + "|") for r in recent)
+                if c.level == "push" and not repeat:
                     title, body = format_change(page, c, res.ms_date, res.updated_at)
-                    notify(title, body, page.url, PUSH)
-                    report.pushed.append(page.slug)
+                    alert(page, title, body, page.url, PUSH, c.summary, c.old_text, c.new_text, res.updated_at)
+                    recent.append(f"{sig}|{now}")
                 else:
                     queue({"kind": "change", "slug": page.slug, "title": page.title, "section": page.section,
-                           "url": page.url, "summary": c.summary, "old_text": c.old_text, "new_text": c.new_text,
+                           "url": page.url, "summary": c.summary + (" (repeat of a recent change)" if repeat else ""),
+                           "old_text": c.old_text, "new_text": c.new_text,
                            "updated_at": res.updated_at, "detected_at": now})
                     report.queued.append(page.slug)
                 if "whats-new" in page.slug:
                     for url in _suggestions(page, [h.new_text for h in hunks], watched):
                         queue({"kind": "suggestion", "url": url, "found_on": page.url, "section": page.section,
                                "detected_at": now})
-        state.pages[page.slug] = PageState(hash=digest, ms_date=res.ms_date, updated_at=res.updated_at)
+        state.pages[page.slug] = PageState(hash=digest, ms_date=res.ms_date, updated_at=res.updated_at,
+                                           recent_pushes=recent)
         if not dry_run:
             snap_dir.mkdir(exist_ok=True)
             snap.write_text(text, encoding="utf-8")
+
+    if len(page_alerts) > MASS_ALERT_LIMIT:   # likely a Learn outage or a big restructure: one push, details in digest
+        names = ", ".join(a[4]["title"] for a in page_alerts[:5])
+        report.notifications.append((f"{len(page_alerts)} pages flagged at once — details in Monday digest",
+                                     f"Possible Microsoft Learn glitch or a large update.\n{names}…", None, PUSH))
+        for a in page_alerts:
+            queue(a[4])
+    else:
+        report.notifications.extend(a[:4] for a in page_alerts)
+
+    if ai_fail and not ai_ok and not state.ai_down:
+        state.ai_down = True
+        report.notifications.append(("AI classification unavailable",
+                                     "Changes now default to the weekly digest unless a fixed rule fires. "
+                                     "Check the Claude API key and credit balance.", None, INFO))
+    elif ai_ok:
+        state.ai_down = False
 
     if roadmap_xml:
         rm = check_roadmap(roadmap_xml, state, client, queue_path, dry_run)
@@ -137,17 +181,28 @@ def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bo
         report.queued.extend(rm.queued)
 
     if first_run:
-        notify(f"Baseline complete: {len(state.pages)} pages watched",
-               "The notifier is running. You'll get a push when an important doc change appears, "
-               "and a digest every Monday.", None, INFO)
+        n = sum(1 for p in state.pages.values() if p.hash)
+        report.notifications.append((f"Baseline complete: {n} pages watched",
+                                     "The notifier is running. You'll get a push when an important doc change appears, "
+                                     "and a digest every Monday.", None, INFO))
 
     if dry_run:
         for n in report.notifications:
             print(f"[dry-run] would send (priority {n[3]}): {n[0]}\n  {n[1][:300]}")
-    else:
-        state.save(state_path)
-        for title, body, click, priority in report.notifications:
+        return report
+
+    unsent = []
+    for title, body, click, priority in [tuple(o) for o in state.outbox] + list(report.notifications):
+        try:
             send(topic, title, body, click, priority, ntfy_session)
+        except Exception as e:  # keep it for the next run rather than lose or double-send it
+            print(f"send failed: {title!r}: {e!r}")
+            unsent.append([title, body, click, priority])
+    state.outbox = unsent
+    report.unsent = len(unsent)
+    state.save(state_path)
+    if not queue_path.exists():
+        queue_path.write_text("[]\n", encoding="utf-8")
     return report
 
 
@@ -172,6 +227,9 @@ def main(argv=None) -> int:
           f"baselined={len(report.baselined)} failed={len(report.failed)}")
     for slug in report.failed:
         print(f"  failed: {slug}")
+    if report.unsent:
+        print(f"{report.unsent} notification(s) could not be sent; kept for the next run")
+        return 2
     return 0
 
 

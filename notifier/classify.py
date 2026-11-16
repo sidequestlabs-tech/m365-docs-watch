@@ -37,6 +37,7 @@ class Classification:
     summary: str
     old_text: str
     new_text: str
+    fallback: bool = False   # True when the AI could not be used
 
 
 def _higher(a: str, b: str) -> str:
@@ -57,7 +58,12 @@ def _prompt(page: Page, hunks: list[Hunk]) -> str:
     for i, h in enumerate(hunks):
         chunk = f"--- change {i + 1}\nOLD: {h.old_text or '(none)'}\nNEW: {h.new_text or '(none)'}\n"
         if used + len(chunk) > budget:
-            parts.append(f"... {len(hunks) - i} more changes omitted\n")
+            room = (budget - used - 120) // 2
+            if room > 200:   # truncate this change rather than drop it
+                parts.append(f"--- change {i + 1} (truncated)\nOLD: {h.old_text[:room]}\nNEW: {h.new_text[:room]}\n")
+                i += 1
+            if i < len(hunks):
+                parts.append(f"... {len(hunks) - i} more changes omitted\n")
             break
         parts.append(chunk)
         used += len(chunk)
@@ -66,7 +72,7 @@ def _prompt(page: Page, hunks: list[Hunk]) -> str:
 
 def _fallback(page: Page, hunks: list[Hunk], level: str) -> Classification:
     first = next((h for h in hunks if rule_floor(h) == "push"), hunks[0])
-    return Classification(level, f"{page.title} changed", first.old_text, first.new_text)
+    return Classification(level, f"{page.title} changed", first.old_text, first.new_text, fallback=True)
 
 
 def classify(page: Page, hunks: list[Hunk], client, use_rules: bool = True) -> Classification:

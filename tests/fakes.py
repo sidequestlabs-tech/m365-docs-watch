@@ -69,3 +69,8 @@ class FakeFetcher:
         if isinstance(r, FetchResult):
             return r
         return FetchResult(200, url, r, None, "2026-11-01T00:00:00Z")
+
+
+class FailingSession(FakeSession):
+    def post(self, url, json=None, timeout=None):
+        raise RuntimeError("ntfy 503")
