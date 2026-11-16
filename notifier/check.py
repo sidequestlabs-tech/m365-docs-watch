@@ -16,7 +16,7 @@ from notifier.classify import classify
 from notifier.diff import diff_hunks, is_trivial
 from notifier.fetch import FetchError, FetchResult, fetch
 from notifier.normalize import extract_article
-from notifier.notify import format_change, send
+from notifier.notify import Telegram, format_change, send
 from notifier.roadmap import FEED_URL, check_roadmap
 from notifier.state import PageState, State, queue_append
 from notifier.watchlist import Page, load_watchlist, slug_for
@@ -70,7 +70,7 @@ def _sig(old: str, new: str) -> str:
     return hashlib.sha256("\x00".join(sorted([old.strip(), new.strip()])).encode()).hexdigest()[:16]
 
 
-def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bool = False,
+def run_check(root: Path, fetcher, client, notify_session, dest, dry_run: bool = False,
               roadmap_xml: str | None = None) -> RunReport:
     root = Path(root)
     pages = load_watchlist(root / "watchlist.yaml")
@@ -194,7 +194,7 @@ def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bo
     unsent = []
     for title, body, click, priority in [tuple(o) for o in state.outbox] + list(report.notifications):
         try:
-            send(topic, title, body, click, priority, ntfy_session)
+            send(dest, title, body, click, priority, notify_session)
         except Exception as e:  # keep it for the next run rather than lose or double-send it
             print(f"send failed: {title!r}: {e!r}")
             unsent.append([title, body, click, priority])
@@ -222,7 +222,7 @@ def main(argv=None) -> int:
         print(f"roadmap feed skipped: {e!r}")
         roadmap_xml = None
     report = run_check(Path(args.root), make_fetcher(session), client, session,
-                       os.environ.get("NTFY_TOPIC", ""), args.dry_run, roadmap_xml)
+                       Telegram.from_env(), args.dry_run, roadmap_xml)
     print(f"pushed={len(report.pushed)} queued={len(report.queued)} "
           f"baselined={len(report.baselined)} failed={len(report.failed)}")
     for slug in report.failed:

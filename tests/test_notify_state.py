@@ -1,4 +1,4 @@
-from fakes import PAGE, FakeSession
+from fakes import DEST, PAGE, FakeSession
 from notifier.classify import Classification
 from notifier.notify import format_change, send
 from notifier.state import PageState, State, queue_append, queue_drain
@@ -6,15 +6,45 @@ from notifier.state import PageState, State, queue_append, queue_drain
 
 def test_body_trimmed():                                  # Review Focus 4
     sent = FakeSession()
-    send("t", "Title →", "x" * 10_000, None, 4, sent)
+    send(DEST, "Title →", "x" * 10_000, None, 4, sent)
     assert len(sent.json["message"].encode()) <= 3500 and sent.json["title"] == "Title →"
-    assert sent.json["topic"] == "t" and sent.json["priority"] == 4
+    assert sent.json["raw"]["chat_id"] == "42" and sent.json["priority"] == 4
+    assert sent.urls[-1] == "https://api.telegram.org/botTOKEN123/sendMessage"
 
 
 def test_body_trim_multibyte_safe():
     sent = FakeSession()
-    send("t", "T", "→" * 5000, "https://x", 3, sent)
+    send(DEST, "T", "→" * 5000, "https://x", 3, sent)
     assert len(sent.json["message"].encode()) <= 3500 and sent.json["click"] == "https://x"
+
+
+def test_html_escaped():
+    sent = FakeSession()
+    send(DEST, "A <b> & C", "if x < 5 & y > 2", "https://x/?a=1&b=2", 4, sent)
+    assert sent.json["raw"]["parse_mode"] == "HTML" and "x &lt; 5 &amp; y" in sent.json["raw"]["text"]
+    assert sent.json["title"] == "A <b> & C" and sent.json["click"] == "https://x/?a=1&b=2"
+
+
+def test_info_priority_is_silent():
+    sent = FakeSession()
+    send(DEST, "T", "b", None, 3, sent)
+    assert sent.json["raw"]["disable_notification"] is True
+
+
+def test_send_error_never_contains_token():               # public repo: Actions logs are public
+    import pytest
+    from types import SimpleNamespace
+    import requests
+
+    class Bad(FakeSession):
+        def post(self, url, json=None, timeout=None):
+            def boom():
+                raise requests.HTTPError(f"400 Client Error: Bad Request for url: {url}")
+            return SimpleNamespace(status_code=400, raise_for_status=boom)
+
+    with pytest.raises(Exception) as e:
+        send(DEST, "T", "b", None, 4, Bad())
+    assert "TOKEN123" not in str(e.value) and "TOKEN123" not in repr(e.value)
 
 
 def test_format_change_has_old_and_new():

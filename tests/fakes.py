@@ -1,7 +1,10 @@
 """Test doubles for external services."""
 from types import SimpleNamespace
 
+from notifier.notify import Telegram
 from notifier.watchlist import Page
+
+DEST = Telegram(token="TOKEN123", chat_id="42")
 
 PAGE = Page(url="https://learn.microsoft.com/en-us/purview/audit-solutions-overview",
             slug="purview__audit-solutions-overview", title="Learn about auditing solutions",
@@ -31,17 +34,27 @@ class RaisingClient:
 
 
 class FakeSession:
-    """Captures ntfy POSTs."""
+    """Captures Telegram sendMessage POSTs and decodes them for assertions."""
 
     def __init__(self):
-        self.sent = []
+        self.sent, self.urls = [], []
 
     @property
     def json(self):
         return self.sent[-1]
 
     def post(self, url, json=None, timeout=None):
-        self.sent.append(json)
+        import html, re
+        self.urls.append(url)
+        text = json["text"]
+        title = html.unescape(re.match(r"<b>(.*?)</b>", text, re.S).group(1))
+        link = re.search(r'<a href="([^"]+)">Open page</a>\Z', text)
+        body = text[text.index("</b>") + 5:]
+        if link:
+            body = body[: link.start() - (text.index("</b>") + 5)].rstrip("\n")
+        self.sent.append({"title": title, "message": html.unescape(body), "raw": json,
+                          "click": html.unescape(link.group(1)) if link else None,
+                          "priority": 3 if json.get("disable_notification") else 4})
         return SimpleNamespace(status_code=200, raise_for_status=lambda: None)
 
 

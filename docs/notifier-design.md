@@ -36,10 +36,10 @@ This is **tool 1 of 2**. Tool 2 (a plain-language playbook built from the same s
 
 ## 3. Constraints
 
-- Runs on **GitHub Actions** in a **public** repo (user's choice, option A + public repo). Public repos get unlimited free Actions minutes, so the minute budget in 5.8 no longer constrains us. Secrets (API key, ntfy topic) stay hidden in a public repo. The README credits Microsoft Learn as the source of the snapshots (the docs are CC BY 4.0).
+- Runs on **GitHub Actions** in a **public** repo (user's choice, option A + public repo). Public repos get unlimited free Actions minutes, so the minute budget in 5.8 no longer constrains us. Secrets (API key, Telegram bot token) stay hidden in a public repo. The README credits Microsoft Learn as the source of the snapshots (the docs are CC BY 4.0).
 - Public repos disable scheduled workflows after 60 days without repo activity. The snapshot commits and weekly digest commit keep the repo active, so this shouldn't trigger. The Monday heartbeat would reveal it if it did.
 - Polite fetching: robots.txt allows these pages (checked 2026-11-15). About 1 request per second, generic User-Agent, retry with backoff. No personal info in requests.
-- Phone delivery via **ntfy** (free app), on a long random topic name stored as a GitHub secret.
+- Phone delivery via a **Telegram bot** (user's choice, replacing ntfy on 2026-11-15): free, arrives as a chat thread the user can scroll back through. Bot token and chat id stored as GitHub secrets. Push-level alerts make a sound; informational ones (baseline, heartbeat, unreachable, AI unavailable) arrive silently.
 - AI classification uses the Claude API (`claude-haiku-5-5`). Expected cost is well under $1/month, because only changed paragraphs are sent.
 - User timezone: US Eastern.
 
@@ -76,7 +76,7 @@ tests/                  # unit tests with saved page fixtures
    - changes a number next to a time or size unit (day/days/month/year/GB/TB/items/rows/results), or
    - adds or removes the words *retire, deprecat, end of support, no longer, removed, replaced by*, or a license name (E3, E5, A5, G5, P1, P2, Premium, Standard, add-on).
 6. **Classify with AI:** send the remaining hunks plus page title and section to `claude-haiku-5-5`. It returns JSON: `{level: push|digest|ignore, one_line_summary, old_text, new_text}`. The level can only be raised by the AI, never lowered below what the safety net set. If the API fails, default to **digest** (or push if the safety net fired).
-7. **Notify:** push alerts go out immediately (ntfy priority high). Title = one-line summary. Body = old → new excerpt (trimmed to fit) + both dates. Tap → the Learn page. Digest items get appended to `digest-queue.json`.
+7. **Notify:** push alerts go out immediately (Telegram message with sound). Title = one-line summary. Body = old → new excerpt (trimmed to fit) + both dates. Tap → the Learn page. Digest items get appended to `digest-queue.json`.
 8. **Commit** updated snapshots, state and queue to the repo. Commit message = list of changed pages, which gives the dated change history.
 
 ### 5.3 Special sources
@@ -85,7 +85,7 @@ tests/                  # unit tests with saved page fixtures
 
 ### 5.4 Weekly digest (Mondays 08:00 Eastern)
 - Group queued items by section. Write `digests/YYYY-Www.md` and commit it.
-- Send one ntfy message: counts per section plus top 3 items. Tap → the digest file on GitHub.
+- Send one Telegram message: counts per section plus top 3 items. Tap → the digest file on GitHub.
 - An empty week sends a one-line "No notable changes this week." That doubles as a weekly heartbeat proving the tool still runs.
 
 ### 5.5 Failures and edge cases
@@ -95,7 +95,7 @@ tests/                  # unit tests with saved page fixtures
 - **First run (baseline):** snapshot everything, send no change alerts, send one push: "Baseline complete: N pages watched."
 
 ### 5.6 Secrets (GitHub repo secrets)
-`ANTHROPIC_API_KEY`, `NTFY_TOPIC`.
+`ANTHROPIC_API_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
 
 ### 5.7 Testing
 - Unit tests on saved HTML fixtures: normalization is stable across two fetches of an unchanged page; a whitespace-only edit → ignored; "90 days" → "180 days" → push via the safety net; a page removed → push.
@@ -107,7 +107,7 @@ tests/                  # unit tests with saved page fixtures
 
 ## 6. What the user must do (one-time, ~20 min)
 1. Have a GitHub account (free).
-2. Install the ntfy app on the phone and subscribe to the topic name the setup gives them.
+2. Install Telegram, create a bot with @BotFather, and send the bot one message (the setup script then finds the chat id).
 3. Create a Claude API key and paste it as a repo secret. Set a $5/month spend cap in the console as a safeguard.
 
 ## 7. Calls made by Claude (not explicitly discussed; user may override)

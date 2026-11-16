@@ -1,6 +1,6 @@
 import json
 
-from fakes import FakeSession
+from fakes import DEST, FakeSession
 from notifier.digest import build_digest, run_digest
 
 
@@ -33,8 +33,8 @@ def test_run_digest_writes_file_drains_queue_and_sends(tmp_path, monkeypatch):
     monkeypatch.setenv("GITHUB_REPOSITORY", "owner/m365-docs-watch")
     (tmp_path / "digest-queue.json").write_text(json.dumps(FIVE))
     ntfy = FakeSession()
-    run_digest(tmp_path, ntfy, "t", week="2026-W47")
+    run_digest(tmp_path, ntfy, DEST, week="2026-W47")
     assert (tmp_path / "digests" / "2026-W47.md").exists()
     assert json.loads((tmp_path / "digest-queue.json").read_text()) == []
     assert ntfy.json["click"] == "https://github.com/owner/m365-docs-watch/blob/main/digests/2026-W47.md"
-    assert ntfy.json["priority"] == 3
+    assert ntfy.json["priority"] == 4          # a digest with changes makes a sound; the empty heartbeat is silent

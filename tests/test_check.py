@@ -1,5 +1,5 @@
 import pytest
-from fakes import FakeClient, FakeFetcher, FakeSession, learn_html
+from fakes import DEST, FakeClient, FakeFetcher, FakeSession, learn_html
 from notifier.check import run_check
 from notifier.fetch import FetchError, FetchResult
 from notifier.watchlist import Page, dump_watchlist, slug_for
@@ -19,7 +19,7 @@ def repo(tmp_path):
 
 def run(repo, responses, ai=AI_DIGEST, dry_run=False):
     ntfy = FakeSession()
-    report = run_check(repo, FakeFetcher(responses), FakeClient(ai), ntfy, "topic", dry_run)
+    report = run_check(repo, FakeFetcher(responses), FakeClient(ai), ntfy, DEST, dry_run)
     return report, ntfy.sent
 
 
@@ -119,10 +119,10 @@ def test_roadmap_wired_into_run(repo):
     import json
     xml = read("roadmap.xml")
     ntfy = FakeSession()
-    run_check(repo, FakeFetcher(base()), FakeClient(AI_DIGEST), ntfy, "t", roadmap_xml=xml)
+    run_check(repo, FakeFetcher(base()), FakeClient(AI_DIGEST), ntfy, DEST, roadmap_xml=xml)
     assert json.loads((repo / "state.json").read_text())["roadmap_seen"] == ["1001", "1002", "1003"]
     push = '{"level":"push","summary":"New thing","old_text":"","new_text":"x"}'
     xml2 = xml.replace("<guid isPermaLink=\"false\">1003</guid>", "<guid isPermaLink=\"false\">1004</guid>")
     ntfy = FakeSession()
-    run_check(repo, FakeFetcher(base()), FakeClient(push), ntfy, "t", roadmap_xml=xml2)
+    run_check(repo, FakeFetcher(base()), FakeClient(push), ntfy, DEST, roadmap_xml=xml2)
     assert [m["title"] for m in ntfy.sent] == ["Roadmap: New thing"]

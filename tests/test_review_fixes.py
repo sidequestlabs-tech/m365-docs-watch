@@ -1,7 +1,7 @@
 """Regression tests for the final-review findings."""
 import json
 
-from fakes import PAGE, FailingSession, FakeClient, FakeFetcher, FakeSession, RaisingClient, learn_html
+from fakes import DEST, PAGE, FailingSession, FakeClient, FakeFetcher, FakeSession, RaisingClient, learn_html
 from notifier.check import run_check
 from notifier.classify import classify
 from notifier.diff import Hunk
@@ -28,11 +28,11 @@ def test_first_run_creates_queue_file(repo):
 
 # Critical 2
 def test_failed_sends_kept_in_outbox_and_retried(repo):
-    rep = run_check(repo, FakeFetcher(base()), FakeClient(AI_DIGEST), FailingSession(), "t")
+    rep = run_check(repo, FakeFetcher(base()), FakeClient(AI_DIGEST), FailingSession(), DEST)
     assert rep.unsent == 1
     assert len(json.loads((repo / "state.json").read_text())["outbox"]) == 1
     ntfy = FakeSession()
-    rep = run_check(repo, FakeFetcher(base()), FakeClient(AI_DIGEST), ntfy, "t")
+    rep = run_check(repo, FakeFetcher(base()), FakeClient(AI_DIGEST), ntfy, DEST)
     assert [m["title"] for m in ntfy.sent] == ["Baseline complete: 3 pages watched"] and rep.unsent == 0
     assert json.loads((repo / "state.json").read_text())["outbox"] == []
 
@@ -75,10 +75,10 @@ def test_ai_outage_alerts_once(repo):
     run(repo, base())
     rc = RaisingClient()
     ntfy = FakeSession()
-    run_check(repo, FakeFetcher(base(**{URLS[1]: learn_html(["Kept 90 days.", "New step one."])})), rc, ntfy, "t")
+    run_check(repo, FakeFetcher(base(**{URLS[1]: learn_html(["Kept 90 days.", "New step one."])})), rc, ntfy, DEST)
     assert any("AI classification unavailable" in m["title"] for m in ntfy.sent)
     ntfy = FakeSession()
-    run_check(repo, FakeFetcher(base(**{URLS[1]: learn_html(["Kept 90 days.", "New step two."])})), rc, ntfy, "t")
+    run_check(repo, FakeFetcher(base(**{URLS[1]: learn_html(["Kept 90 days.", "New step two."])})), rc, ntfy, DEST)
     assert not any("AI classification" in m["title"] for m in ntfy.sent)
 
 

@@ -8,7 +8,7 @@ from pathlib import Path
 
 import requests
 
-from notifier.notify import send
+from notifier.notify import Telegram, send
 from notifier.state import queue_drain
 
 
@@ -45,7 +45,7 @@ def build_digest(items: list[dict], week: str) -> tuple[str, str, str]:
     return "\n".join(md), title, (counts or "") + top + extra
 
 
-def run_digest(root: Path, ntfy_session, topic: str, week: str | None = None, dry_run: bool = False) -> str:
+def run_digest(root: Path, notify_session, dest, week: str | None = None, dry_run: bool = False) -> str:
     root = Path(root)
     week = week or "{}-W{:02d}".format(*date.today().isocalendar()[:2])
     queue_path = root / "digest-queue.json"
@@ -63,7 +63,7 @@ def run_digest(root: Path, ntfy_session, topic: str, week: str | None = None, dr
         return md
     (root / "digests").mkdir(exist_ok=True)
     (root / "digests" / f"{week}.md").write_text(md, encoding="utf-8")
-    send(topic, title, body, click, 3, ntfy_session)
+    send(dest, title, body, click, 4 if items else 3, notify_session)
     return md
 
 
@@ -72,7 +72,7 @@ def main(argv=None) -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--root", default=Path(__file__).resolve().parent.parent)
     args = ap.parse_args(argv)
-    run_digest(Path(args.root), requests.Session(), os.environ.get("NTFY_TOPIC", ""), dry_run=args.dry_run)
+    run_digest(Path(args.root), requests.Session(), Telegram.from_env(), dry_run=args.dry_run)
     return 0
 
 
