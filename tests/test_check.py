@@ -112,3 +112,17 @@ def test_dry_run_writes_nothing(repo):
     report, sent = run(repo, base(), dry_run=True)
     assert sent == [] and not (repo / "snapshots").exists() and not (repo / "state.json").exists()
     assert len(report.baselined) == 3
+
+
+def test_roadmap_wired_into_run(repo):
+    from conftest import read
+    import json
+    xml = read("roadmap.xml")
+    ntfy = FakeSession()
+    run_check(repo, FakeFetcher(base()), FakeClient(AI_DIGEST), ntfy, "t", roadmap_xml=xml)
+    assert json.loads((repo / "state.json").read_text())["roadmap_seen"] == ["1001", "1002", "1003"]
+    push = '{"level":"push","summary":"New thing","old_text":"","new_text":"x"}'
+    xml2 = xml.replace("<guid isPermaLink=\"false\">1003</guid>", "<guid isPermaLink=\"false\">1004</guid>")
+    ntfy = FakeSession()
+    run_check(repo, FakeFetcher(base()), FakeClient(push), ntfy, "t", roadmap_xml=xml2)
+    assert [m["title"] for m in ntfy.sent] == ["Roadmap: New thing"]

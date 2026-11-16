@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel><title>Microsoft 365 Roadmap</title>
+<item><guid isPermaLink="false">1001</guid><link>https://www.microsoft.com/microsoft-365/roadmap?id=1001</link><category>Rolling out</category><category>Microsoft Purview</category><title>Microsoft Purview: Audit (Standard) log retention extended</title><description>&lt;p&gt;Audit (Standard) customers will retain audit records for 365 days.&lt;/p&gt;</description></item>
+<item><guid isPermaLink="false">1002</guid><link>https://www.microsoft.com/microsoft-365/roadmap?id=1002</link><category>In development</category><category>Microsoft Teams</category><title>Microsoft Teams: New meeting reactions</title><description>&lt;p&gt;More emoji in meetings.&lt;/p&gt;</description></item>
+<item><guid isPermaLink="false">1003</guid><link>https://www.microsoft.com/microsoft-365/roadmap?id=1003</link><category>In development</category><category>Microsoft Defender XDR</category><title>New advanced hunting table for Copilot activity</title><description>&lt;p&gt;Hunt across Copilot interactions.&lt;/p&gt;</description></item>
+</channel></rss>

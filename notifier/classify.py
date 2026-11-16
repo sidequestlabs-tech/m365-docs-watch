@@ -69,9 +69,9 @@ def _fallback(page: Page, hunks: list[Hunk], level: str) -> Classification:
     return Classification(level, f"{page.title} changed", first.old_text, first.new_text)
 
 
-def classify(page: Page, hunks: list[Hunk], client) -> Classification:
+def classify(page: Page, hunks: list[Hunk], client, use_rules: bool = True) -> Classification:
     floor = "digest"
-    for h in hunks:
+    for h in hunks if use_rules else []:
         floor = _higher(floor, rule_floor(h))
     try:
         resp = client.messages.create(

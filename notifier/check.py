@@ -17,6 +17,7 @@ from notifier.diff import diff_hunks, is_trivial
 from notifier.fetch import FetchError, FetchResult, fetch
 from notifier.normalize import extract_article
 from notifier.notify import format_change, send
+from notifier.roadmap import FEED_URL, check_roadmap
 from notifier.state import PageState, State, queue_append
 from notifier.watchlist import Page, load_watchlist, slug_for
 
@@ -59,7 +60,8 @@ def _suggestions(page: Page, new_texts: list[str], watched: set[str]) -> list[st
     return found
 
 
-def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bool = False) -> RunReport:
+def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bool = False,
+              roadmap_xml: str | None = None) -> RunReport:
     root = Path(root)
     pages = load_watchlist(root / "watchlist.yaml")
     watched = {p.slug for p in pages}
@@ -129,6 +131,11 @@ def run_check(root: Path, fetcher, client, ntfy_session, topic: str, dry_run: bo
             snap_dir.mkdir(exist_ok=True)
             snap.write_text(text, encoding="utf-8")
 
+    if roadmap_xml:
+        rm = check_roadmap(roadmap_xml, state, client, queue_path, dry_run)
+        report.notifications.extend(rm.notifications)
+        report.queued.extend(rm.queued)
+
     if first_run:
         notify(f"Baseline complete: {len(state.pages)} pages watched",
                "The notifier is running. You'll get a push when an important doc change appears, "
@@ -152,8 +159,15 @@ def main(argv=None) -> int:
     import anthropic
     session = requests.Session()
     client = anthropic.Anthropic() if os.environ.get("ANTHROPIC_API_KEY") else None
+    try:
+        resp = session.get(FEED_URL, headers={"User-Agent": "m365-docs-watch/1.0"}, timeout=60)
+        resp.raise_for_status()
+        roadmap_xml = resp.text
+    except requests.RequestException as e:
+        print(f"roadmap feed skipped: {e!r}")
+        roadmap_xml = None
     report = run_check(Path(args.root), make_fetcher(session), client, session,
-                       os.environ.get("NTFY_TOPIC", ""), args.dry_run)
+                       os.environ.get("NTFY_TOPIC", ""), args.dry_run, roadmap_xml)
     print(f"pushed={len(report.pushed)} queued={len(report.queued)} "
           f"baselined={len(report.baselined)} failed={len(report.failed)}")
     for slug in report.failed:
