@@ -1,0 +1,691 @@
+pages:
+- url: https://learn.microsoft.com/en-us/purview/audit-solutions-overview
+  slug: purview__audit-solutions-overview
+  title: Learn about auditing solutions
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: States Standard vs Premium differences and **default retention**. This is the page where a 90→180-day change shows up.
+- url: https://learn.microsoft.com/en-us/purview/audit-get-started
+  slug: purview__audit-get-started
+  title: Get started with auditing
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Licensing and setup requirements. Tells you if auditing was even on for the tenant.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-enable-disable
+  slug: purview__audit-log-enable-disable
+  title: Turn auditing on or off
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: How to check whether auditing was disabled. An attacker turning it off is itself evidence.
+- url: https://learn.microsoft.com/en-us/purview/audit-search
+  slug: purview__audit-search
+  title: Search the audit log
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: 'The portal search: limits, how long results are kept, how many rows you can get.'
+- url: https://learn.microsoft.com/en-us/purview/audit-log-export-records
+  slug: purview__audit-log-export-records
+  title: Export, configure, and view audit log records
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: CSV export from the portal and how to unpack the `AuditData` JSON column. This is your "CSV export vs PowerShell" question.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-search-script
+  slug: purview__audit-log-search-script
+  title: Use a PowerShell script to search the audit log
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Microsoft's own script for pulling large volumes past the portal limits.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-retention-policies
+  slug: purview__audit-log-retention-policies
+  title: Manage audit log retention policies
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Custom retention (up to 10 years with add-ons). Changes here affect how far back you can look.
+- url: https://learn.microsoft.com/en-us/purview/audit-mailboxes
+  slug: purview__audit-mailboxes
+  title: Manage mailbox auditing
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Which mailbox actions are logged by default per license, including MailItemsAccessed. Critical for "did they read the email?"
+- url: https://learn.microsoft.com/en-us/purview/audit-log-activities
+  slug: purview__audit-log-activities
+  title: Audit log activities
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: The master list of every operation name. New operations appear here first.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-detailed-properties
+  slug: purview__audit-log-detailed-properties
+  title: Detailed properties in the audit log
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: What each field in a record means. Needed to interpret any export.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-exchange-properties
+  slug: purview__audit-log-exchange-properties
+  title: Exchange properties in the audit log
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: false
+  why: Exchange-specific fields (LogonType, ClientInfoString, etc.).
+- url: https://learn.microsoft.com/en-us/purview/audit-supported-services
+  slug: purview__audit-supported-services
+  title: Microsoft 365 services that support auditing
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Which workloads log at all. Tells you when a question **can't** be answered from the UAL.
+- url: https://learn.microsoft.com/en-us/purview/audit-copilot
+  slug: purview__audit-copilot
+  title: Audit logs for Copilot and AI applications
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Copilot prompts and responses, a newer and fast-changing area that's increasingly part of insider cases.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-investigate-accounts
+  slug: purview__audit-log-investigate-accounts
+  title: Investigate compromised accounts
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Microsoft's guidance on using MailItemsAccessed and other events for account takeover (business email compromise).
+- url: https://learn.microsoft.com/en-us/purview/audit-log-identify-email-messages
+  slug: purview__audit-log-identify-email-messages
+  title: Investigate deleted or missing emails
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: false
+  why: Step-by-step for a very common question.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-search-email
+  slug: purview__audit-log-search-email
+  title: Investigate specific email messages
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: false
+  why: Tracing what happened to one message.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-identify-mailbox-rules
+  slug: purview__audit-log-identify-mailbox-rules
+  title: Investigate mailbox rule changes
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: true
+  why: Forwarding and inbox rules, the classic sign of business email compromise.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-sharing
+  slug: purview__audit-log-sharing
+  title: Investigate sharing activities
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: false
+  why: SharePoint/OneDrive external sharing, for data exfiltration questions.
+- url: https://learn.microsoft.com/en-us/purview/audit-teams-audit-log-events
+  slug: purview__audit-teams-audit-log-events
+  title: Investigate Microsoft Teams events
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: false
+  why: Which Teams actions are logged.
+- url: https://learn.microsoft.com/en-us/purview/audit-log-search-deleted-mailbox-items
+  slug: purview__audit-log-search-deleted-mailbox-items
+  title: Investigate deleted mailbox items
+  section: 1. Purview Audit — the unified audit log (UAL)
+  core: false
+  why: Deletion tracking, for anti-forensics questions.
+- url: https://learn.microsoft.com/en-us/purview/edisc
+  slug: purview__edisc
+  title: Learn about eDiscovery
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Overview of the current experience and what's included per license.
+- url: https://learn.microsoft.com/en-us/purview/edisc-get-started
+  slug: purview__edisc-get-started
+  title: Get started with eDiscovery
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Prerequisites and first-time setup.
+- url: https://learn.microsoft.com/en-us/purview/edisc-permissions
+  slug: purview__edisc-permissions
+  title: Assign eDiscovery permissions
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Role groups needed. The first blocker in many engagements.
+- url: https://learn.microsoft.com/en-us/purview/edisc-cases-manage
+  slug: purview__edisc-cases-manage
+  title: Create and manage cases
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Your "eDiscovery cases section".
+- url: https://learn.microsoft.com/en-us/purview/edisc-search-query
+  slug: purview__edisc-search-query
+  title: Create a search for a case
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Building searches in the current UI.
+- url: https://learn.microsoft.com/en-us/purview/edisc-keyword-query-language
+  slug: purview__edisc-keyword-query-language
+  title: Use Keyword Query Language (KQL) to create search queries
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: 'Search syntax. Note: this "KQL" is **Keyword** Query Language, a different language from **Kusto** Query Language.'
+- url: https://learn.microsoft.com/en-us/purview/edisc-condition-builder
+  slug: purview__edisc-condition-builder
+  title: Use the condition builder
+  section: 2. Purview eDiscovery — collecting content
+  core: false
+  why: The point-and-click alternative to typing queries.
+- url: https://learn.microsoft.com/en-us/purview/edisc-search-results
+  slug: purview__edisc-search-results
+  title: Evaluate and refine search results
+  section: 2. Purview eDiscovery — collecting content
+  core: false
+  why: Statistics and sampling before export.
+- url: https://learn.microsoft.com/en-us/purview/edisc-search-export
+  slug: purview__edisc-search-export
+  title: Export search results
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Export formats and options. Defensibility depends on doing this right.
+- url: https://learn.microsoft.com/en-us/purview/edisc-settings-export
+  slug: purview__edisc-settings-export
+  title: Configure export settings
+  section: 2. Purview eDiscovery — collecting content
+  core: false
+  why: Tenant-wide export defaults.
+- url: https://learn.microsoft.com/en-us/purview/edisc-review-set-manage
+  slug: purview__edisc-review-set-manage
+  title: Manage review sets
+  section: 2. Purview eDiscovery — collecting content
+  core: false
+  why: Premium-tier review and processing.
+- url: https://learn.microsoft.com/en-us/purview/edisc-review-set-export
+  slug: purview__edisc-review-set-export
+  title: Export items from a review set
+  section: 2. Purview eDiscovery — collecting content
+  core: false
+  why: Export path from review sets, which differs from search export.
+- url: https://learn.microsoft.com/en-us/purview/edisc-hold-create
+  slug: purview__edisc-hold-create
+  title: Create holds
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Preserving evidence before it ages out.
+- url: https://learn.microsoft.com/en-us/purview/edisc-hold-types-mailboxes
+  slug: purview__edisc-hold-types-mailboxes
+  title: Identify mailbox hold types
+  section: 2. Purview eDiscovery — collecting content
+  core: false
+  why: Working out which holds already exist on a mailbox.
+- url: https://learn.microsoft.com/en-us/purview/edisc-ref-limits
+  slug: purview__edisc-ref-limits
+  title: eDiscovery limits
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Hard numbers (search/export sizes, concurrent jobs). Limit changes are notification-worthy.
+- url: https://learn.microsoft.com/en-us/purview/edisc-ref-partially-indexed-items
+  slug: purview__edisc-ref-partially-indexed-items
+  title: Partially indexed items in eDiscovery
+  section: 2. Purview eDiscovery — collecting content
+  core: true
+  why: Content search may **miss**. You need this to explain gaps in a report.
+- url: https://learn.microsoft.com/en-us/purview/edisc-ref-audit-log
+  slug: purview__edisc-ref-audit-log
+  title: Search for eDiscovery activities in the audit log
+  section: 2. Purview eDiscovery — collecting content
+  core: false
+  why: Proving your own collection steps, for chain of custody.
+- url: https://learn.microsoft.com/en-us/purview/insider-risk-management
+  slug: purview__insider-risk-management
+  title: Insider Risk Management overview
+  section: 3. Insider Risk & other Purview investigation tools
+  core: true
+  why: What it detects and the licensing.
+- url: https://learn.microsoft.com/en-us/purview/insider-risk-management-audit-log
+  slug: purview__insider-risk-management-audit-log
+  title: Insider risk audit log
+  section: 3. Insider Risk & other Purview investigation tools
+  core: true
+  why: Who in the tenant viewed or changed insider risk cases.
+- url: https://learn.microsoft.com/en-us/purview/insider-risk-management-activities
+  slug: purview__insider-risk-management-activities
+  title: Insider risk activities
+  section: 3. Insider Risk & other Purview investigation tools
+  core: true
+  why: Reviewing user activity timelines and alerts.
+- url: https://learn.microsoft.com/en-us/purview/insider-risk-management-forensic-evidence
+  slug: purview__insider-risk-management-forensic-evidence
+  title: Insider risk forensic evidence
+  section: 3. Insider Risk & other Purview investigation tools
+  core: false
+  why: Screen-capture evidence on endpoints. Has privacy and legal implications.
+- url: https://learn.microsoft.com/en-us/purview/insider-risk-management-settings
+  slug: purview__insider-risk-management-settings
+  title: Insider risk settings
+  section: 3. Insider Risk & other Purview investigation tools
+  core: false
+  why: Settings like anonymization and policy indicators that affect what you'll see.
+- url: https://learn.microsoft.com/en-us/purview/data-security-investigations
+  slug: purview__data-security-investigations
+  title: Data Security Investigations
+  section: 3. Insider Risk & other Purview investigation tools
+  core: true
+  why: Newer AI-assisted investigation product in Purview. Fast-changing.
+- url: https://learn.microsoft.com/en-us/purview/data-classification-activity-explorer
+  slug: purview__data-classification-activity-explorer
+  title: Activity explorer
+  section: 3. Insider Risk & other Purview investigation tools
+  core: false
+  why: Label and DLP activity history, with its own retention window.
+- url: https://learn.microsoft.com/en-us/purview/communication-compliance
+  slug: purview__communication-compliance
+  title: Communication compliance
+  section: 3. Insider Risk & other Purview investigation tools
+  core: false
+  why: Message policy matches. Sometimes the source of an internal case.
+- url: https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/search-unifiedauditlog?view=exchange-ps
+  slug: powershell__module__exchangepowershell__search-unifiedauditlog
+  title: Search-UnifiedAuditLog
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: The main cmdlet for UAL pulls. Parameter and limit changes matter.
+- url: https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/search-mailboxauditlog?view=exchange-ps
+  slug: powershell__module__exchangepowershell__search-mailboxauditlog
+  title: Search-MailboxAuditLog
+  section: 4. PowerShell & API acquisition
+  core: false
+  why: Older mailbox-audit cmdlet, being retired. Watching for its end date.
+- url: https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/search-adminauditlog?view=exchange-ps
+  slug: powershell__module__exchangepowershell__search-adminauditlog
+  title: Search-AdminAuditLog
+  section: 4. PowerShell & API acquisition
+  core: false
+  why: Exchange admin changes.
+- url: https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/new-compliancesearch?view=exchange-ps
+  slug: powershell__module__exchangepowershell__new-compliancesearch
+  title: New-ComplianceSearch
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: Scripted eDiscovery searches.
+- url: https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/new-compliancesearchaction?view=exchange-ps
+  slug: powershell__module__exchangepowershell__new-compliancesearchaction
+  title: New-ComplianceSearchAction
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: Scripted export and purge actions.
+- url: https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/get-messagetracev2?view=exchange-ps
+  slug: powershell__module__exchangepowershell__get-messagetracev2
+  title: Get-MessageTraceV2
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: Replacement for the older Get-MessageTrace. Message flow evidence.
+- url: https://learn.microsoft.com/en-us/powershell/module/exchangepowershell/get-inboxrule?view=exchange-ps
+  slug: powershell__module__exchangepowershell__get-inboxrule
+  title: Get-InboxRule
+  section: 4. PowerShell & API acquisition
+  core: false
+  why: Current-state collection of inbox rules.
+- url: https://learn.microsoft.com/en-us/powershell/exchange/connect-to-exchange-online-powershell?view=exchange-ps
+  slug: powershell__exchange__connect-to-exchange-online-powershell
+  title: Connect to Exchange Online PowerShell
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: Authentication changes, like module versions or auth methods being retired, break your workflow.
+- url: https://learn.microsoft.com/en-us/powershell/exchange/connect-to-scc-powershell?view=exchange-ps
+  slug: powershell__exchange__connect-to-scc-powershell
+  title: Connect to Security & Compliance PowerShell
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: Same, for the eDiscovery cmdlets.
+- url: https://learn.microsoft.com/en-us/graph/api/resources/security-auditlogquery?view=graph-rest-1.0
+  slug: graph__api__resources__security-auditlogquery
+  title: 'Graph API: auditLogQuery'
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: The newer API for UAL searches, returning JSON. Likely the future of bulk audit pulls.
+- url: https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-reference
+  slug: office__office-365-management-api__office-365-management-activity-api-reference
+  title: Office 365 Management Activity API reference
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: Streaming audit API used by SIEMs and collection tools.
+- url: https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-schema
+  slug: office__office-365-management-api__office-365-management-activity-api-schema
+  title: Office 365 Management Activity API schema
+  section: 4. PowerShell & API acquisition
+  core: true
+  why: The JSON field definitions, including record type numbers.
+- url: https://learn.microsoft.com/en-us/graph/api/signin-list?view=graph-rest-1.0
+  slug: graph__api__signin-list
+  title: 'Graph API: list sign-ins'
+  section: 4. PowerShell & API acquisition
+  core: false
+  why: Programmatic Entra sign-in export.
+- url: https://learn.microsoft.com/en-us/graph/api/directoryaudit-list?view=graph-rest-1.0
+  slug: graph__api__directoryaudit-list
+  title: 'Graph API: list directory audits'
+  section: 4. PowerShell & API acquisition
+  core: false
+  why: Programmatic Entra audit export.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-overview
+  slug: defender-xdr__advanced-hunting-overview
+  title: Advanced hunting overview
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: true
+  why: Includes the **30-day lookback** for hunting data. A change there matters a lot.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables
+  slug: defender-xdr__advanced-hunting-schema-tables
+  title: Advanced hunting schema tables
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: true
+  why: Index of all tables. New tables appear here.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-limits
+  slug: defender-xdr__advanced-hunting-limits
+  title: Advanced hunting limits
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: true
+  why: Row, time and resource limits on queries and exports.
+- url: https://learn.microsoft.com/en-us/defender-xdr/api-advanced-hunting
+  slug: defender-xdr__api-advanced-hunting
+  title: Advanced hunting API
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: true
+  why: Exporting query results programmatically.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-cloudappevents-table
+  slug: defender-xdr__advanced-hunting-cloudappevents-table
+  title: CloudAppEvents table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: true
+  why: M365 activity (similar to UAL data) queryable in KQL.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-emailevents-table
+  slug: defender-xdr__advanced-hunting-emailevents-table
+  title: EmailEvents table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: true
+  why: Email delivery and threat data.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-urlclickevents-table
+  slug: defender-xdr__advanced-hunting-urlclickevents-table
+  title: UrlClickEvents table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: false
+  why: 'Safe Links clicks: "did the user click the phishing link?"'
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-entraidsigninevents-table
+  slug: defender-xdr__advanced-hunting-entraidsigninevents-table
+  title: EntraIdSignInEvents table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: true
+  why: Entra sign-ins in hunting. Newer name for the table below.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-aadsignineventsbeta-table
+  slug: defender-xdr__advanced-hunting-aadsignineventsbeta-table
+  title: AADSignInEventsBeta table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: false
+  why: Old table name. Watching for its retirement date.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-identitylogonevents-table
+  slug: defender-xdr__advanced-hunting-identitylogonevents-table
+  title: IdentityLogonEvents table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: false
+  why: Logons seen by Defender for Identity and Defender for Cloud Apps.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-graphapiauditevents-table
+  slug: defender-xdr__advanced-hunting-graphapiauditevents-table
+  title: GraphApiAuditEvents table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: false
+  why: Graph API calls, useful for spotting attacker tooling.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-oauthappinfo-table
+  slug: defender-xdr__advanced-hunting-oauthappinfo-table
+  title: OAuthAppInfo table
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: false
+  why: Malicious app consent investigations.
+- url: https://learn.microsoft.com/en-us/defender-xdr/data-privacy
+  slug: defender-xdr__data-privacy
+  title: Defender XDR data privacy & retention
+  section: 5. Defender XDR — Advanced Hunting (Kusto KQL)
+  core: false
+  why: Where Defender data is stored and how long it's kept.
+- url: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/reference-reports-data-retention
+  slug: entra__identity__monitoring-health__reference-reports-data-retention
+  title: Entra data retention
+  section: 6. Entra ID (Azure AD) logs
+  core: true
+  why: Sign-in and audit log retention per license, as short as 7 days on free tiers. **High-priority watch.**
+- url: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins
+  slug: entra__identity__monitoring-health__concept-sign-ins
+  title: Sign-in logs
+  section: 6. Entra ID (Azure AD) logs
+  core: true
+  why: Log types (interactive, non-interactive, service principal) and their fields.
+- url: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-audit-logs
+  slug: entra__identity__monitoring-health__concept-audit-logs
+  title: Audit logs
+  section: 6. Entra ID (Azure AD) logs
+  core: true
+  why: Directory changes such as MFA resets, role grants and app consents.
+- url: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-download-logs
+  slug: entra__identity__monitoring-health__howto-download-logs
+  title: Download logs
+  section: 6. Entra ID (Azure AD) logs
+  core: true
+  why: Portal CSV/JSON export limits.
+- url: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-integrate-activity-logs-with-azure-monitor-logs
+  slug: entra__identity__monitoring-health__howto-integrate-activity-logs-with-azure-monitor-logs
+  title: Send logs to Azure Monitor
+  section: 6. Entra ID (Azure AD) logs
+  core: false
+  why: How to keep logs longer than default retention. A "next time" recommendation for clients.
+- url: https://learn.microsoft.com/en-us/azure/sentinel/data-connectors-reference#microsoft-365-formerly-office-365
+  slug: azure__sentinel__data-connectors-reference
+  title: Sentinel data connectors (Microsoft 365 connector)
+  section: 7. Microsoft Sentinel / Log Analytics
+  core: false
+  why: What M365 data a client's Sentinel actually holds.
+- url: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/officeactivity
+  slug: azure__azure-monitor__reference__tables__officeactivity
+  title: OfficeActivity table
+  section: 7. Microsoft Sentinel / Log Analytics
+  core: false
+  why: Where UAL data lands in Sentinel, often kept longer than Purview's retention.
+- url: https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-retention-configure
+  slug: azure__azure-monitor__logs__data-retention-configure
+  title: Log Analytics data retention
+  section: 7. Microsoft Sentinel / Log Analytics
+  core: false
+  why: Interactive vs long-term retention tiers.
+- url: https://learn.microsoft.com/en-us/azure/sentinel/move-to-defender
+  slug: azure__sentinel__move-to-defender
+  title: Sentinel moving to the Defender portal
+  section: 7. Microsoft Sentinel / Log Analytics
+  core: false
+  why: Ongoing portal migration that changes where you click.
+- url: https://learn.microsoft.com/en-us/defender-xdr/microsoft-sentinel-onboard
+  slug: defender-xdr__microsoft-sentinel-onboard
+  title: Connect Sentinel to Defender XDR
+  section: 7. Microsoft Sentinel / Log Analytics
+  core: false
+  why: The unified portal setup.
+- url: https://learn.microsoft.com/en-us/exchange/monitoring/trace-an-email-message/message-trace-modern-eac
+  slug: exchange__monitoring__trace-an-email-message__message-trace-modern-eac
+  title: Message trace (modern EAC)
+  section: 8. Exchange mail evidence
+  core: true
+  why: 'Portal message trace: how far back it goes and what it shows.'
+- url: https://learn.microsoft.com/en-us/exchange/security-and-compliance/recoverable-items-folder/recoverable-items-folder
+  slug: exchange__security-and-compliance__recoverable-items-folder__recoverable-items-folder
+  title: Recoverable Items folder
+  section: 8. Exchange mail evidence
+  core: true
+  why: Where "deleted" mail still lives and for how long.
+- url: https://learn.microsoft.com/en-us/exchange/policy-and-compliance/holds/litigation-holds
+  slug: exchange__policy-and-compliance__holds__litigation-holds
+  title: Litigation holds
+  section: 8. Exchange mail evidence
+  core: false
+  why: Mailbox-level preservation.
+- url: https://learn.microsoft.com/en-us/purview/whats-new
+  slug: purview__whats-new
+  title: What's new in Purview
+  section: 9. Change feeds & licensing (watch these for *new* things)
+  core: true
+  why: Monthly roundup for Audit, eDiscovery and Insider Risk.
+- url: https://learn.microsoft.com/en-us/defender-xdr/whats-new
+  slug: defender-xdr__whats-new
+  title: What's new in Defender XDR
+  section: 9. Change feeds & licensing (watch these for *new* things)
+  core: true
+  why: New tables, features and retirements.
+- url: https://learn.microsoft.com/en-us/entra/fundamentals/whats-new
+  slug: entra__fundamentals__whats-new
+  title: What's new in Entra
+  section: 9. Change feeds & licensing (watch these for *new* things)
+  core: true
+  why: Sign-in log and retention changes, deprecations.
+- url: https://learn.microsoft.com/en-us/azure/sentinel/whats-new
+  slug: azure__sentinel__whats-new
+  title: What's new in Sentinel
+  section: 9. Change feeds & licensing (watch these for *new* things)
+  core: false
+  why: Connector and table changes.
+- url: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-365-security-compliance-licensing-guidance
+  slug: office365__servicedescriptions__microsoft-365-service-descriptions__microsoft-365-tenantlevel-services-licensing-guidance__microsoft-365-security-compliance-licensing-guidance
+  title: M365 security & compliance licensing guidance
+  section: 9. Change feeds & licensing (watch these for *new* things)
+  core: true
+  why: Which license unlocks which logs. The answer to "why doesn't this tenant have MailItemsAccessed?"
+- url: https://learn.microsoft.com/en-us/purview/retention
+  slug: purview__retention
+  title: Purview retention overview
+  section: 9. Change feeds & licensing (watch these for *new* things)
+  core: false
+  why: Content retention and deletion policies that decide whether evidence still exists.
+- url: https://learn.microsoft.com/en-us/security/zero-trust/security-operations-incident-response-playbooks
+  slug: security__zero-trust__security-operations-incident-response-playbooks
+  title: Incident response playbooks (index)
+  section: 10. Microsoft's own IR playbooks
+  core: false
+  why: Entry point.
+- url: https://learn.microsoft.com/en-us/security/zero-trust/security-operations-playbook-phishing
+  slug: security__zero-trust__security-operations-playbook-phishing
+  title: Phishing playbook
+  section: 10. Microsoft's own IR playbooks
+  core: false
+  why: Lists which logs to pull for phishing / business email compromise.
+- url: https://learn.microsoft.com/en-us/security/zero-trust/security-operations-playbook-app-consent
+  slug: security__zero-trust__security-operations-playbook-app-consent
+  title: App consent grant playbook
+  section: 10. Microsoft's own IR playbooks
+  core: false
+  why: Malicious OAuth app investigations.
+- url: https://learn.microsoft.com/en-us/security/zero-trust/security-operations-playbook-password-spray
+  slug: security__zero-trust__security-operations-playbook-password-spray
+  title: Password spray playbook
+  section: 10. Microsoft's own IR playbooks
+  core: false
+  why: Sign-in log analysis.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/data-storage-privacy
+  slug: defender-endpoint__data-storage-privacy
+  title: Defender for Endpoint data storage & retention
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: States how long device telemetry is kept (the device timeline window). A retention change here is a top-tier alert.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/investigate-machines
+  slug: defender-endpoint__investigate-machines
+  title: Investigate devices (device page & timeline)
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: 'The portal device timeline: how far back it goes and how to export events from it.'
+- url: https://learn.microsoft.com/en-us/defender-endpoint/live-response
+  slug: defender-endpoint__live-response
+  title: Live response
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: Remote shell on a device to collect files, memory-related artifacts and run scripts. Your remote acquisition tool. Permission and command changes matter.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/live-response-command-examples
+  slug: defender-endpoint__live-response-command-examples
+  title: Live response command examples
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: Exact syntax for `getfile`, `collect`, `run` and others.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/respond-machine-alerts
+  slug: defender-endpoint__respond-machine-alerts
+  title: Take response actions on a device
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: '**Collect investigation package** (logs, autoruns, prefetch, etc.) and isolate a device. Lists what the package contains.'
+- url: https://learn.microsoft.com/en-us/defender-endpoint/respond-file-alerts
+  slug: defender-endpoint__respond-file-alerts
+  title: Take response actions on a file
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: Download or collect a file sample from devices for analysis.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/api/collect-investigation-package
+  slug: defender-endpoint__api__collect-investigation-package
+  title: 'API: Collect investigation package'
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: Scripted collection across many devices.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/api/run-live-response
+  slug: defender-endpoint__api__run-live-response
+  title: 'API: Run live response'
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: Scripted live response, for automating collection at scale.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/automated-investigations
+  slug: defender-endpoint__automated-investigations
+  title: Automated investigations
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: What Defender did automatically, such as remediating files. Explains changes to the device you might misread as attacker activity.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint
+  slug: defender-endpoint__microsoft-defender-endpoint
+  title: Defender for Endpoint overview
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: Plan tiers (P1 vs P2). P1 tenants lack much of the telemetry below.
+- url: https://learn.microsoft.com/en-us/defender-endpoint/whats-new-in-microsoft-defender-endpoint
+  slug: defender-endpoint__whats-new-in-microsoft-defender-endpoint
+  title: What's new in Defender for Endpoint
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: Change feed for new telemetry, response actions and retirements.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceprocessevents-table
+  slug: defender-xdr__advanced-hunting-deviceprocessevents-table
+  title: DeviceProcessEvents table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: Process creation with command lines. The backbone of execution evidence.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceevents-table
+  slug: defender-xdr__advanced-hunting-deviceevents-table
+  title: DeviceEvents table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: Catch-all security events (USB mounts, AV detections, PowerShell commands, etc.). New ActionTypes appear here.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-devicefileevents-table
+  slug: defender-xdr__advanced-hunting-devicefileevents-table
+  title: DeviceFileEvents table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: File create, modify, rename and delete. Exfiltration staging and malware drops.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-devicenetworkevents-table
+  slug: defender-xdr__advanced-hunting-devicenetworkevents-table
+  title: DeviceNetworkEvents table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: Outbound connections, for C2 and exfiltration questions.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-devicelogonevents-table
+  slug: defender-xdr__advanced-hunting-devicelogonevents-table
+  title: DeviceLogonEvents table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: Local and remote logons (RDP, network), for lateral movement.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceregistryevents-table
+  slug: defender-xdr__advanced-hunting-deviceregistryevents-table
+  title: DeviceRegistryEvents table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: true
+  why: Registry changes, for persistence.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceimageloadevents-table
+  slug: defender-xdr__advanced-hunting-deviceimageloadevents-table
+  title: DeviceImageLoadEvents table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: DLL loads, for side-loading and injection questions.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceinfo-table
+  slug: defender-xdr__advanced-hunting-deviceinfo-table
+  title: DeviceInfo table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: Device names, OS versions and onboarding state over time. Needed to map hostnames to device IDs.
+- url: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-devicefilecertificateinfo-table
+  slug: defender-xdr__advanced-hunting-devicefilecertificateinfo-table
+  title: DeviceFileCertificateInfo table
+  section: 11. Endpoint forensics — Defender for Endpoint
+  core: false
+  why: Signer info, for spotting unsigned or spoofed binaries.
