@@ -8,6 +8,14 @@ Note
 
 For information about feature availability in US Government clouds, see the Microsoft Sentinel tables in [Cloud feature availability for US Government customers](/en-us/azure/security/fundamentals/feature-availability).
 
+## November 2026
+
+- [SAP solution pricing for ISOC customers](#sap-solution-pricing-for-isoc-customers)
+
+### SAP solution pricing for ISOC customers
+
+As part of ISOC benefit, the SAP solution for Sentinel is now included at no additional cost for active SAP production SIDs, making it easier to cover your full SAP landscape, including development, test, and QA systems. Learn about [Microsoft Sentinel solutions for SAP](sap/solution-overview) and [SAP applications solution pricing](sap/sap-applications-overview#solution-pricing). For when this change takes effect and for more details, see the [Microsoft Ignite announcement](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/run-agentless-sap-connector-cost-efficiently/4464781).
+
 ## October 2026
 
 - [Detect use of vulnerable SAP BTP custom apps (Preview)](#detect-use-of-vulnerable-sap-btp-custom-apps-preview)

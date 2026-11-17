@@ -16,6 +16,7 @@ You can also get product updates and important notifications through the [messag
 
 ## November 2026
 
+- (Preview) **Protect AI assets from trusted-identity attacks**: Microsoft Defender XDR now includes new security-for-AI coverage to help protect AI assets from identity compromise patterns that can be used to weaponize trusted agents. This preview focuses on detections and disruption for device code phishing scenarios targeting GitHub Copilot CLI in Microsoft Defender. For best coverage, connect the GitHub connector at the **Enterprise level**. For connector setup guidance, see [Protect your GitHub Enterprise environment](/en-us/defender-cloud-apps/protect-github). For details, see [Protect AI agents from trusted-identity attacks (Preview)](/en-us/defender-xdr/security-for-ai/protect-ai-agents-from-trusted-identity-attacks).
 - (Preview) **New navigation**: The reorganized Microsoft Defender portal navigation brings security operations together in one integrated experience. Microsoft Sentinel pages move from a separate Sentinel section into the areas where they're used. Moved and newly added items are marked **New**.
 
   The navigation you see depends on your experience. If your organization still uses the Microsoft Sentinel navigation, continue using the existing paths. If you use Integrated Security Operations Center (ISOC) in Microsoft Defender, use the new paths in the following table, which lists the main navigation changes.

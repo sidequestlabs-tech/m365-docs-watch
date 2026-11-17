@@ -29,5 +29,45 @@
   "found_on": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
   "section": "9. Change feeds & licensing (watch these for *new* things)",
   "detected_at": "2026-11-17T09:54:38+00:00"
+ },
+ {
+  "kind": "change",
+  "slug": "defender-xdr__whats-new",
+  "title": "What's new in Defender XDR",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "url": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
+  "summary": "New preview: device code phishing detections for GitHub Copilot CLI in Defender",
+  "old_text": "(none)",
+  "new_text": "(Preview) **Protect AI assets from trusted-identity attacks**: Microsoft Defender XDR now includes new security-for-AI coverage to help protect AI assets from identity compromise patterns",
+  "updated_at": "2026-11-17T18:34:00Z",
+  "detected_at": "2026-11-17T18:49:25+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/defender-cloud-apps/protect-github",
+  "found_on": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "detected_at": "2026-11-17T18:49:25+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/defender-xdr/security-for-ai/protect-ai-agents-from-trusted-identity-attacks",
+  "found_on": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "detected_at": "2026-11-17T18:49:25+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/azure/sentinel/sap/solution-overview",
+  "found_on": "https://learn.microsoft.com/en-us/azure/sentinel/whats-new",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "detected_at": "2026-11-17T18:49:25+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/azure/sentinel/sap/sap-applications-overview",
+  "found_on": "https://learn.microsoft.com/en-us/azure/sentinel/whats-new",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "detected_at": "2026-11-17T18:49:25+00:00"
  }
 ]

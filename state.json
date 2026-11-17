@@ -41,12 +41,14 @@
    "recent_pushes": []
   },
   "azure__sentinel__whats-new": {
-   "hash": "51652c42fbdc8958f6882a46ff6e58a0d337e804dbf02e84ad053c52c6ff089b",
-   "ms_date": "2026-10-21T00:00:00Z",
-   "updated_at": "2026-11-09T18:41:00Z",
+   "hash": "d36b46cb54d9d93310814d7bd93a9fed04ec9dc3abdc279db1d81bd3925fd590",
+   "ms_date": "2026-11-16T00:00:00Z",
+   "updated_at": "2026-11-17T18:34:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": []
+   "recent_pushes": [
+    "d4e31cb9372c68ac|2026-11-17T18:49:25+00:00"
+   ]
   },
   "defender-endpoint__api__collect-investigation-package": {
    "hash": "fc463defb014a21536b65d1513a680bfa9851e06111cb6a1d1ae213040fd6d8f",
@@ -319,9 +321,9 @@
    ]
   },
   "defender-xdr__whats-new": {
-   "hash": "372d85da54f57c98d62a003b21ff138ed4ed053d763bdfda3c8b74469b4f3c2a",
-   "ms_date": "2026-11-11T00:00:00Z",
-   "updated_at": "2026-11-17T08:37:00Z",
+   "hash": "7a49697928215c3c39edafecb725398e6c68a1f260bbbd89e2624081b87466e4",
+   "ms_date": "2026-11-16T00:00:00Z",
+   "updated_at": "2026-11-17T18:34:00Z",
    "failures": 0,
    "missing": false,
    "recent_pushes": []
