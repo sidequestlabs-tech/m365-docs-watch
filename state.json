@@ -33,9 +33,9 @@
    "recent_pushes": []
   },
   "azure__sentinel__move-to-defender": {
-   "hash": "a528bafb8e8beb880d835bdead4093fdb9d044932b1466dda22e741cf83b7eec",
+   "hash": "583714321a2d97fd7ba8770ea3470eec67c8742d97e4ed73d72a194c7263cf7c",
    "ms_date": "2026-09-10T00:00:00Z",
-   "updated_at": "2026-11-01T18:38:00Z",
+   "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
    "recent_pushes": []
@@ -273,17 +273,19 @@
    "recent_pushes": []
   },
   "defender-xdr__advanced-hunting-overview": {
-   "hash": "ef178b286d7f50137b7ebb0d66152a7b106af3579c0d47856256cd0d720774ba",
+   "hash": "c6983f510cdf5cbe3c4ba30f81dd3dbdb5f7aac9804629ae64289f86c46b168a",
    "ms_date": "2026-11-09T00:00:00Z",
-   "updated_at": "2026-11-10T13:37:00Z",
+   "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": []
+   "recent_pushes": [
+    "c37dff036465aa9e|2026-11-17T09:54:38+00:00"
+   ]
   },
   "defender-xdr__advanced-hunting-schema-tables": {
    "hash": "c44cb4d07f80bca68d625e27a453d231710e7a59836e3066aec24b2eed42f855",
    "ms_date": "2026-11-09T00:00:00Z",
-   "updated_at": "2026-11-10T13:37:00Z",
+   "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
    "recent_pushes": []
@@ -297,25 +299,29 @@
    "recent_pushes": []
   },
   "defender-xdr__api-advanced-hunting": {
-   "hash": "0a5bc8fa54a2e1185ce90be28e1cbcca1415166a0fdffe4c4bce830dd752b5b3",
-   "ms_date": "2026-08-03T00:00:00Z",
-   "updated_at": "2026-10-20T12:39:00Z",
+   "hash": "3c61ed6149723d0752929917752946fdb2b8fa8605de0898db9845a59dd1b43b",
+   "ms_date": "2026-10-15T00:00:00Z",
+   "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": []
+   "recent_pushes": [
+    "0afcb20cc335bd58|2026-11-17T09:54:38+00:00"
+   ]
   },
   "defender-xdr__data-privacy": {
-   "hash": "4db8ee166691698909e938af8362a363f6df0318c6da397aa7c08d497504121b",
-   "ms_date": "2025-08-24T00:00:00Z",
-   "updated_at": "2026-06-24T17:35:00Z",
+   "hash": "cf3baf3b1488a989a2ba6c68b230c9d18c146a7c2b9a7c21acc36515b46879bb",
+   "ms_date": "2026-10-15T00:00:00Z",
+   "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": []
+   "recent_pushes": [
+    "4a691c45bc574347|2026-11-17T09:54:38+00:00"
+   ]
   },
   "defender-xdr__whats-new": {
-   "hash": "f18adf69bf3b1ae4d97368c4b9c9deafdbb63a9f14e9416bfb19e82c797db650",
-   "ms_date": "2026-09-08T00:00:00Z",
-   "updated_at": "2026-10-21T17:38:00Z",
+   "hash": "372d85da54f57c98d62a003b21ff138ed4ed053d763bdfda3c8b74469b4f3c2a",
+   "ms_date": "2026-11-11T00:00:00Z",
+   "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
    "recent_pushes": []

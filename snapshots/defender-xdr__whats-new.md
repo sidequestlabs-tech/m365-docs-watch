@@ -14,6 +14,28 @@ For more information on what's new with other Microsoft Defender security produc
 
 You can also get product updates and important notifications through the [message center](https://admin.microsoft.com/Adminportal/Home#/MessageCenter).
 
+## November 2026
+
+- (Preview) **New navigation**: The reorganized Microsoft Defender portal navigation brings security operations together in one integrated experience. Microsoft Sentinel pages move from a separate Sentinel section into the areas where they're used. Moved and newly added items are marked **New**.
+
+  The navigation you see depends on your experience. If your organization still uses the Microsoft Sentinel navigation, continue using the existing paths. If you use Integrated Security Operations Center (ISOC) in Microsoft Defender, use the new paths in the following table, which lists the main navigation changes.
+
+  | Old location | New location |
+  | --- | --- |
+  | **Investigation & response > Partner catalog** | **Content management > Partner catalog** |
+  | **Microsoft Sentinel > Threat management > Workbooks** | **Dashboards & reports > Workbooks** |
+  | **Microsoft Sentinel > Threat management > Hunting** | **Investigation & response > Hunts** |
+  | **Microsoft Sentinel > Threat management > Notebooks** | **Investigation & response > Notebooks** |
+  | **Microsoft Sentinel > Threat management > MITRE ATT&CK** | **Threat intelligence > MITRE ATT&CK** |
+  | **Microsoft Sentinel > Content management > Content hub** | **Content management > Content hub** |
+  | **Microsoft Sentinel > Content management > Repositories** | **Content management > Repositories** |
+  | **Microsoft Sentinel > Content management > Community** | **Content management > Community** |
+  | **Microsoft Sentinel > Configuration > Analytics** | **Investigation & response > Detection > Analytics** |
+  | **Microsoft Sentinel > Configuration > Summary rules** | **Investigation & response > Summary rules** |
+  | **Microsoft Sentinel > Configuration > Automation** | **Automations** (top level) |
+
+  For an overview of the portal, see [Microsoft Defender XDR in the Microsoft Defender portal](microsoft-365-defender-portal).
+
 ## September 2026
 
 - (Preview) **Integrated Security Operations Center (ISOC) in Microsoft Defender** brings XDR, SIEM, threat intelligence, automation, and AI capabilities together in the Microsoft Defender portal. Starting September 23, 2026, it's available to eligible Microsoft 365 E5 and E7 customers without an active Microsoft Sentinel workspace. For more information, see [ISOC in Microsoft Defender](isoc-overview).

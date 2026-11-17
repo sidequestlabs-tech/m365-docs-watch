@@ -1,1 +1,33 @@
-[]
+[
+ {
+  "kind": "change",
+  "slug": "azure__sentinel__move-to-defender",
+  "title": "Sentinel moving to the Defender portal",
+  "section": "7. Microsoft Sentinel / Log Analytics",
+  "url": "https://learn.microsoft.com/en-us/azure/sentinel/move-to-defender",
+  "summary": "Bookmarks hunting location restated with new Defender portal menu path added",
+  "old_text": "bookmarks are still available in **Microsoft Sentinel** > **Threat management** > **Hunting**, which provides the Microsoft Sentinel-specific hunting experience.",
+  "new_text": "bookmarks are still available in the Microsoft Sentinel-specific hunting experience:\n- In Microsoft Sentinel: **Microsoft Sentinel > Threat management > Hunting**.\n- In ISOC main navigation menu: **Investigation & response > Hunts**.",
+  "updated_at": "2026-11-17T08:37:00Z",
+  "detected_at": "2026-11-17T09:54:38+00:00"
+ },
+ {
+  "kind": "change",
+  "slug": "defender-xdr__whats-new",
+  "title": "What's new in Defender XDR",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "url": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
+  "summary": "Defender portal (Preview) navigation reorganized; Sentinel menu paths moved for ISOC users",
+  "old_text": "",
+  "new_text": "(Preview) **New navigation**: The reorganized Microsoft Defender portal navigation brings security operations together in one integrated experience. Microsoft Sentinel pages move from a separate Sentinel section into the areas where they're used.",
+  "updated_at": "2026-11-17T08:37:00Z",
+  "detected_at": "2026-11-17T09:54:38+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/defender-xdr/microsoft-365-defender-portal",
+  "found_on": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "detected_at": "2026-11-17T09:54:38+00:00"
+ }
+]
