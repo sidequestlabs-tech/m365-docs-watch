@@ -1,4 +1,5 @@
 """Phone notifications via a Telegram bot (sendMessage, HTML formatting)."""
+import re
 from dataclasses import dataclass
 from html import escape
 
@@ -26,6 +27,8 @@ class Telegram:
         import os
         return cls(os.environ.get("TELEGRAM_BOT_TOKEN", ""), os.environ.get("TELEGRAM_CHAT_ID", ""))
 EXCERPT_CHARS = 600
+# Bodies are plain text (escaped in send); only these exact change-alert labels are turned bold.
+_LABEL = re.compile(r"^((?:🔴|🟢|📅) (?:OLD|NEW|Page updated):)", re.M)
 
 
 def _trim(text: str, limit: int = MAX_BODY_BYTES) -> str:
@@ -37,7 +40,8 @@ def _trim(text: str, limit: int = MAX_BODY_BYTES) -> str:
 
 def send(dest: Telegram, title: str, body: str, click: str | None, priority: int, session) -> None:
     """priority 4 = normal alert with sound; 3 = informational, delivered silently."""
-    text = f"<b>{escape(title[:200], quote=False)}</b>\n{escape(_trim(body), quote=False)}"
+    body = _LABEL.sub(r"<b>\1</b>", escape(_trim(body), quote=False))
+    text = f"<b>{escape(title[:200], quote=False)}</b>\n{body}"
     if click:
         text += f'\n<a href="{escape(click, quote=True)}">Open page</a>'
     payload = {"chat_id": dest.chat_id, "text": text, "parse_mode": "HTML",
@@ -54,8 +58,10 @@ def _clip(s: str) -> str:
 
 
 def format_change(page: Page, c: Classification, ms_date: str | None, updated_at: str | None) -> tuple[str, str]:
-    lines = [f"OLD: {_clip(c.old_text) or '(none)'}", f"NEW: {_clip(c.new_text) or '(none)'}"]
+    def quoted(s):
+        return f'"{_clip(s)}"' if _clip(s) else "(none)"
+    lines = ["🔴 OLD:", "", quoted(c.old_text), "", "🟢 NEW:", "", quoted(c.new_text), ""]
     if updated_at:
-        lines.append(f"Page updated: {updated_at[:10]}")
-    lines.append(page.section)
+        lines += [f"📅 Page updated: {updated_at[:10]}", ""]
+    lines.append(f"🔷 {page.section}")
     return c.summary, "\n".join(lines)

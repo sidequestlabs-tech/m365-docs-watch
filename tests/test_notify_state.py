@@ -50,7 +50,11 @@ def test_send_error_never_contains_token():               # public repo: Actions
 def test_format_change_has_old_and_new():
     title, body = format_change(PAGE, Classification("push", "Audit retention 90→180 days", "90 days", "180 days"), None, "2026-07-08T17:35:00Z")
     assert title == "Audit retention 90→180 days"
-    assert "OLD: 90 days" in body and "NEW: 180 days" in body and "2026-07-08" in body
+    assert '🔴 OLD:\n\n"90 days"\n\n🟢 NEW:\n\n"180 days"\n\n📅 Page updated: 2026-07-08\n\n🔷 ' in body
+    sent = FakeSession()
+    send(DEST, title, body, None, 4, sent)
+    text = sent.json["raw"]["text"]
+    assert "<b>🔴 OLD:</b>" in text and "<b>🟢 NEW:</b>" in text and "<b>📅 Page updated:</b>" in text
 
 
 def test_state_roundtrip(tmp_path):
