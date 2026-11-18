@@ -321,12 +321,14 @@
    ]
   },
   "defender-xdr__whats-new": {
-   "hash": "7a49697928215c3c39edafecb725398e6c68a1f260bbbd89e2624081b87466e4",
+   "hash": "cae1484d48b91e10a8be49eb8005c19b3d40284629ea6da234ff92b14ea2efca",
    "ms_date": "2026-11-16T00:00:00Z",
-   "updated_at": "2026-11-17T18:34:00Z",
+   "updated_at": "2026-11-18T18:36:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": []
+   "recent_pushes": [
+    "38536e336b7e2780|2026-11-18T18:45:21+00:00"
+   ]
   },
   "entra__fundamentals__whats-new": {
    "hash": "de4cb0381be1eecadf50c293bdea4dba8b328ac2254f0a13034e537002f4b9aa",
