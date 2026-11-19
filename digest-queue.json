@@ -119,5 +119,17 @@
   "found_on": "https://learn.microsoft.com/en-us/defender-endpoint/whats-new-in-microsoft-defender-endpoint",
   "section": "11. Endpoint forensics — Defender for Endpoint",
   "detected_at": "2026-11-18T00:55:24+00:00"
+ },
+ {
+  "kind": "change",
+  "slug": "roadmap-581739",
+  "title": "M365 Roadmap: Microsoft Purview: Information Protection-Sensitivity label inheritance for Teams meeting artifacts",
+  "section": "M365 Roadmap",
+  "url": "https://www.microsoft.com/microsoft-365/roadmap?id=581739",
+  "summary": "Roadmap item added: Teams meeting artifacts inherit sensitivity labels, GA December CY2026",
+  "old_text": "",
+  "new_text": "Teams meeting artifacts, including recordings, transcripts, and Loop notes, can now be configured to automatically inherit the sensitivity label from the meeting. This ensures content generated during meetings is consistently protected without requiring manual labeling, reducing risk and simplifying protection at scale. GA date: December CY2026",
+  "updated_at": null,
+  "detected_at": "2026-11-19T03:52:36+00:00"
  }
 ]
