@@ -17,12 +17,14 @@
    "recent_pushes": []
   },
   "azure__sentinel__data-connectors-reference": {
-   "hash": "38bbe08e4af233fba6c337ea8058fc4d09efb072e81c5069acce39200bb69dc3",
+   "hash": "1f0a0d72e9310e14e6892692f9cca33e67e13fbb380d5923b185282e09081bfc",
    "ms_date": "2026-02-05T00:00:00Z",
    "updated_at": "2026-06-28T17:38:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": []
+   "recent_pushes": [
+    "61d2179c2fa6d001|2026-11-23T18:51:43+00:00"
+   ]
   },
   "azure__sentinel__microsoft-sentinel-onboard": {
    "hash": "acdded6692668c53967abcf09b79974852b3095629bbbce35ff5f56252a703c7",
