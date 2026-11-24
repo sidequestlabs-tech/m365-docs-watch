@@ -282,9 +282,7 @@
    "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": [
-    "c37dff036465aa9e|2026-11-17T09:54:38+00:00"
-   ]
+   "recent_pushes": []
   },
   "defender-xdr__advanced-hunting-schema-tables": {
    "hash": "c44cb4d07f80bca68d625e27a453d231710e7a59836e3066aec24b2eed42f855",
@@ -308,9 +306,7 @@
    "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": [
-    "0afcb20cc335bd58|2026-11-17T09:54:38+00:00"
-   ]
+   "recent_pushes": []
   },
   "defender-xdr__data-privacy": {
    "hash": "cf3baf3b1488a989a2ba6c68b230c9d18c146a7c2b9a7c21acc36515b46879bb",
@@ -318,9 +314,7 @@
    "updated_at": "2026-11-17T08:37:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": [
-    "4a691c45bc574347|2026-11-17T09:54:38+00:00"
-   ]
+   "recent_pushes": []
   },
   "defender-xdr__whats-new": {
    "hash": "60bbf28406fa6d323a1900bd7d0f8813cf8e67e60b274d9e06d9bc0ad9f97aac",
