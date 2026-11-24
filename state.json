@@ -48,9 +48,7 @@
    "updated_at": "2026-11-17T18:34:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": [
-    "d4e31cb9372c68ac|2026-11-17T18:49:25+00:00"
-   ]
+   "recent_pushes": []
   },
   "defender-endpoint__api__collect-investigation-package": {
    "hash": "fc463defb014a21536b65d1513a680bfa9851e06111cb6a1d1ae213040fd6d8f",
