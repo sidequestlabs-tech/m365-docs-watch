@@ -320,9 +320,7 @@
    "updated_at": "2026-11-22T23:34:00Z",
    "failures": 0,
    "missing": false,
-   "recent_pushes": [
-    "38536e336b7e2780|2026-11-18T18:45:21+00:00"
-   ]
+   "recent_pushes": []
   },
   "entra__fundamentals__whats-new": {
    "hash": "de4cb0381be1eecadf50c293bdea4dba8b328ac2254f0a13034e537002f4b9aa",
