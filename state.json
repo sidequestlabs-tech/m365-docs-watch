@@ -131,9 +131,9 @@
    "recent_pushes": []
   },
   "defender-endpoint__whats-new-in-microsoft-defender-endpoint": {
-   "hash": "d365ead21f846b6614c5b358d4a8231363af93eabf155fcb57e4bcb3d27e1d40",
-   "ms_date": "2026-10-30T00:00:00Z",
-   "updated_at": "2026-11-17T23:36:00Z",
+   "hash": "1e80eb6fd40ad96387794e172a1912bf803692cf2bd85eb0126d2e8c598b20d8",
+   "ms_date": "2026-11-16T00:00:00Z",
+   "updated_at": "2026-11-25T23:34:00Z",
    "failures": 0,
    "missing": false,
    "recent_pushes": []
@@ -315,9 +315,9 @@
    "recent_pushes": []
   },
   "defender-xdr__whats-new": {
-   "hash": "60bbf28406fa6d323a1900bd7d0f8813cf8e67e60b274d9e06d9bc0ad9f97aac",
+   "hash": "d1c436ed2f3bfda615c0d795ebdda280a4cad8502cfd82a39ad89a5c22c0ad44",
    "ms_date": "2026-11-16T00:00:00Z",
-   "updated_at": "2026-11-22T23:34:00Z",
+   "updated_at": "2026-11-25T23:34:00Z",
    "failures": 0,
    "missing": false,
    "recent_pushes": []

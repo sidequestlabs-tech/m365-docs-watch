@@ -1,1 +1,47 @@
-[]
+[
+ {
+  "kind": "change",
+  "slug": "defender-xdr__whats-new",
+  "title": "What's new in Defender XDR",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "url": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
+  "summary": "New domain filter added to device inventory portal",
+  "old_text": "(none)",
+  "new_text": "Domain filter in device inventory portal: You can now filter devices by their Active Directory domain in the device inventory.",
+  "updated_at": "2026-11-25T23:34:00Z",
+  "detected_at": "2026-11-26T00:56:41+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/defender-endpoint/device-inventory-field-reference",
+  "found_on": "https://learn.microsoft.com/en-us/defender-xdr/whats-new",
+  "section": "9. Change feeds & licensing (watch these for *new* things)",
+  "detected_at": "2026-11-26T00:56:41+00:00"
+ },
+ {
+  "kind": "change",
+  "slug": "defender-endpoint__whats-new-in-microsoft-defender-endpoint",
+  "title": "What's new in Defender for Endpoint",
+  "section": "11. Endpoint forensics — Defender for Endpoint",
+  "url": "https://learn.microsoft.com/en-us/defender-endpoint/whats-new-in-microsoft-defender-endpoint",
+  "summary": "New feature rows: device inventory domain filter (GA) and export API $filter (Preview)",
+  "old_text": "",
+  "new_text": "| Feature | Domain filter in device inventory portal | GA | You can now filter devices by their Active Directory domain in the device inventory.",
+  "updated_at": "2026-11-25T23:34:00Z",
+  "detected_at": "2026-11-26T00:56:41+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/defender-endpoint/device-inventory-field-reference",
+  "found_on": "https://learn.microsoft.com/en-us/defender-endpoint/whats-new-in-microsoft-defender-endpoint",
+  "section": "11. Endpoint forensics — Defender for Endpoint",
+  "detected_at": "2026-11-26T00:56:41+00:00"
+ },
+ {
+  "kind": "suggestion",
+  "url": "https://learn.microsoft.com/en-us/defender-endpoint/api/export-assessment-server-side-filtering",
+  "found_on": "https://learn.microsoft.com/en-us/defender-endpoint/whats-new-in-microsoft-defender-endpoint",
+  "section": "11. Endpoint forensics — Defender for Endpoint",
+  "detected_at": "2026-11-26T00:56:41+00:00"
+ }
+]
